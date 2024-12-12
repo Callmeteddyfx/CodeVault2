@@ -58,6 +58,8 @@ function createNote(){
             class = 'fa-solid fa-pen'></i></button>
            <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
             class = 'fa-solid fa-trash'></i></button>
+            <button id = 'copyBtn' onClick = 'copyNote(${note.id})'><i 
+            class = 'fa-solid fa-copy'></i></button>
             </div>  
             `;
             notesList.appendChild(listItem);
