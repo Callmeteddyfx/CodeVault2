@@ -5,8 +5,7 @@ function popup(){
     <h1>New Code</h1>
     <textarea id = "note-text" placeholder = "Enter your code..."></textarea>
      <div id = "btn-container">
-     /*Buttons Creation*/
-        <button id = "submitBtn" onclick = "createNote()">Create</button>
+        <button id = "submitBtn" onclick = "createNote()">Save</button>
          <button id = "closeBtn" onclick = "closePopup()">Close</button>
     </div>
          </div>
@@ -22,12 +21,12 @@ function closePopup(){
 }
 
 
-function CreateNote(){
+function createNote(){
     const popupContainer = document.getElementById('popupContainer');
     const noteText = document.getElementById('note-text').value;
     if(noteText.trim() !== ''){
         const note = {
-            id: new Date.getTime(),
+            id: new Date().getTime(),
             text: noteText
         };
 
@@ -40,7 +39,7 @@ function CreateNote(){
         popupContainer.remove();
         displayNotes();
     }
-    
+}
 
 
     function displayNotes(){
@@ -54,7 +53,7 @@ function CreateNote(){
             listItem.innerHTML = `
             <span>${note.text}</span>
             <div id = 'noteBtns-container'>
-            /*add copy code button here*/
+          
             <button id = "editBtn" onClick = 'editNote(${note.id})'><i
             class = 'fa-solid fa-pen'></i></button>
            <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
@@ -64,7 +63,7 @@ function CreateNote(){
             notesList.appendChild(listItem);
         });
     }
-} //potential error cause.
+//potential error cause.
 
 function editNote(noteId){
     const notes = JSON.parse(localStorage.getItem('notes')) || [];
@@ -73,13 +72,61 @@ function editNote(noteId){
     const editingPopup = document.createElement('div');
 
     editingPopup.innerHTML= `
-    <div id=editing-container' data-note-id = "${noteId}">
+    <div id='editing-container' data-note-id = "${noteId}">
     <h1>Edit Code</h1>
     <textarea id = "note-text">${noteText}</textarea>
     <div id="btn-container">
-        <button id="submitBtn" onClick="updateNote()">Done</button>
-        <button id="closeBtn" onClick="closeEditPopup()">Cancel</button>
+        <button id="submitBtn" onclick="updateNote()">Edit</button>
+        <button id="closeBtn" onclick="closeEditPopup()">Cancel</button>
         </div>
     </div>
-    `
+    `;
+    document.body.appendChild(editingPopup);
 }
+
+function closeEditPopup(){
+    const editingPopup = document.getElementById('editing-container');
+
+    if(editingPopup){
+        editingPopup.remove();
+    }
+}
+
+function updateNote(){
+    const noteText = document.getElementById('note-text').value.trim();
+    const editingPopup = document.getElementById('editing-container');
+
+    if(noteText !== ''){
+        const noteId = editingPopup.getAttribute('data-note-id');
+        let notes = JSON.parse(localStorage.getItem('notes')) || [];
+
+    //Find the Note to update
+    const updatedNotes = notes.map(note => {
+        if (note.id == noteId ){
+            return {id: note.id, text: noteText};
+        }
+        return note;
+    });
+
+    //Update the notes in local storage
+    localStorage.setItem('notes', JSON.stringify(updatedNotes));
+
+    //Close the editing popup
+    editingPopup.remove();
+
+    //Refresh the displayed notes
+    displayNotes();
+
+    }
+}
+
+function deleteNote(noteId){
+    let notes = JSON.parse(localStorage.getItem('notes')) || [];
+    notes = notes.filter(note => note.id !== noteId);
+
+    localStorage.setItem('notes', JSON.stringify(notes));
+    displayNotes();
+}
+
+
+displayNotes();
