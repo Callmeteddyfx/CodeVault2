@@ -103,7 +103,7 @@ li {
 }
 
 li span{
-    font-size: 15px;
+    font-size: 12px;
     flex-grow: 1;
     word-wrap: break-word;
     overflow-y:scroll;
