@@ -45,6 +45,9 @@ body{
 #addNoteDiv{
     background-color: #f9f9f9;
     border: 1px solid #ddd;
+    border: #1900ff;
+    border-style: outset;
+    border-width: 1.5px;
     padding: 20px;
     border-radius: 8px;
     height: 200px;
