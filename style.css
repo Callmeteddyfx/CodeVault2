@@ -151,3 +151,33 @@ background-color: gray;
     align-items: center;
     justify-content: center;
 }
+/*You can add a new note hover here*/
+
+textarea{
+width: 300px;
+height: 200px;
+margin: 10px 0;
+padding: 10px;
+box-sizing: border-box;
+border-radius: 4px;
+border: 2px solid #8c53ff;
+}
+
+#btn-container{
+    display: flex;
+}
+
+#submitBtn, #closeBtn{
+width: 100px;
+background-color: #8c53ff;
+color: #fff;
+font-size: 14px;
+border: none;
+border-radius: 5px;
+padding: 10px;
+cursor: pointer;
+margin: 10px;
+}
+#closeBtn{
+background-color: gainsboro;
+}
