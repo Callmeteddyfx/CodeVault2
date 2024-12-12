@@ -11,4 +11,56 @@ function popup(){
     </div>
          </div>
     `;
+    document.body.appendChild(popupContainer);
+}
+
+function closePopup(){
+    const popupContainer = document.getElementById('popupContainer')
+    if (popupContainer){
+        popupContainer.remove();
+    }
+}
+
+
+function CreateNote(){
+    const popupContainer = document.getElementById('popupContainer');
+    const noteText = document.getElementById('note-text').value;
+    if(noteText.trim() !== ''){
+        const note = {
+            id: new Date.getTime(),
+            text: noteText
+        };
+
+        const existingNotes = JSON.parse(localStorage.getItem('notes')) || [];
+        existingNotes.push(note);
+
+        localStorage.setItem('notes', JSON.stringify(existingNotes));
+        document.getElementById('note-text').value = '';
+
+        popupContainer.remove();
+        displayNotes();
+    }
+
+
+    function displayNotes(){
+        const notesList = document.getElementById('notes-list');
+        notesList.innerHTML = '';
+
+        const notes = JSON.parse(localStorage.getItem('notes')) || [];
+
+        notes.forEach(note => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+            <span>${note.text}</span>
+            <div id = 'noteBtns-container'>
+            /*add copy code button here*/
+            <button id = "editBtn" onClick = 'editNote(${note.id})'><i
+            class = 'fa-solid fa-pen'></i></button>
+           <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
+            class = 'fa-solid fa-trash'></i></button>
+            </div>
+          
+            `;
+        });
+    }
 }
