@@ -40,6 +40,7 @@ function CreateNote(){
         popupContainer.remove();
         displayNotes();
     }
+    
 
 
     function displayNotes(){
@@ -58,9 +59,27 @@ function CreateNote(){
             class = 'fa-solid fa-pen'></i></button>
            <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
             class = 'fa-solid fa-trash'></i></button>
-            </div>
-          
+            </div>  
             `;
+            notesList.appendChild(listItem);
         });
     }
+} //potential error cause.
+
+function editNote(noteId){
+    const notes = JSON.parse(localStorage.getItem('notes')) || [];
+    const noteToEdit = notes.find(note => note.id == noteId) ;
+    const noteText = noteToEdit ? noteToEdit.text : '';
+    const editingPopup = document.createElement('div');
+
+    editingPopup.innerHTML= `
+    <div id=editing-container' data-note-id = "${noteId}">
+    <h1>Edit Code</h1>
+    <textarea id = "note-text">${noteText}</textarea>
+    <div id="btn-container">
+        <button id="submitBtn" onClick="updateNote()">Done</button>
+        <button id="closeBtn" onClick="closeEditPopup()">Cancel</button>
+        </div>
+    </div>
+    `
 }
