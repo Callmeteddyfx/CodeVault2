@@ -58,14 +58,14 @@ function createNote(){
             class = 'fa-solid fa-pen'></i></button>
            <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
             class = 'fa-solid fa-trash'></i></button>
-            <button id = 'copyBtn' onClick = 'copyNote(${note.id})'><i 
+            <button id = 'copyBtn' onClick = 'copyNote()'><i 
             class = 'fa-solid fa-copy'></i></button>
             </div>  
             `;
             notesList.appendChild(listItem);
         });
     }
-//potential error cause.
+
 
 function editNote(noteId){
     const notes = JSON.parse(localStorage.getItem('notes')) || [];
@@ -132,3 +132,21 @@ function deleteNote(noteId){
 
 
 displayNotes();
+
+function showToast(message) {
+    var toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "show";
+  
+    setTimeout(function() {
+      toast.className = toast.className.replace("show", "");
+    }, 3000); // 3 seconds
+  }
+  
+  
+
+function copyNote(noteId){
+    showToast('Copied'); 
+    const copy = JSON.parse(localStorage.getItem('notes-list'));
+    return navigator.clipboard.writeText(copy);
+}

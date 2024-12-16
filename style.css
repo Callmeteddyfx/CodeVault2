@@ -1,6 +1,6 @@
 body{
     font-family: 'Poppins', sans-serif;
-    background-color: #8c53ff;
+    background-color: #FFD400;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -21,6 +21,13 @@ body{
     align-items: center;
     justify-content: center;
     overflow-y: scroll;
+}
+
+#title{
+    font-size: 50px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0px;
+    border: 0px;
 }
 
 #list-header{
@@ -44,8 +51,7 @@ body{
 
 #addNoteDiv{
     background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border: #1900ff;
+    border: #FFD400;
     border-style: outset;
     border-width: 1.5px;
     padding: 20px;
@@ -86,8 +92,7 @@ text-align: left;
 }
 
 li {
-    background-color: #1900ff;
-    margin: 5px 0;
+    background-color: #FFD400;
     padding: 20px;
     border-radius: 8px;
     display: flex;
@@ -98,13 +103,13 @@ li {
     width: 200px;
     margin: 10px;
     border-radius: 10px;
-    box-shadow: 9px 9px 18px #b3b3b3,
+    box-shadow: 6px 6px 6.8px #b3b3b3,
     -9px -9px 18px #fff;
 }
 
 li span{
-    font-size: 12px;
-    flex-grow: 1;
+    font-size: 14px;
+    /*flex-grow: 1;*/
     word-wrap: break-word;
     overflow-y:scroll;
     scrollbar-width: none;
@@ -113,31 +118,40 @@ li span{
 
 #editBtn, #copyBtn,
 #deleteBtn {
-    background-color: #c6aaff;
-    color: #fff;
+    color: #000000;
     border: none;
     padding: 5px 10px;
     margin: 0 5px;
     cursor: pointer;
-    border-radius: 4px;
     font-size: 12px;
     width: 30px;
 }
 
 #editBtn {
-    background-color: gainsboro;
+    background-color: transparent;
 }
 
 #copyBtn {
-    background-color: gainsboro;
+    background-color:transparent;
+}
+
+#deleteBtn {
+    background-color:transparent;
+}
+
+#copyBtn:hover{
+    color: white;
+    transition: color 0.2s;
 }
 
 #deleteBtn:hover{
-background-color: #8c53ff;
+    color: white;
+    transition: color 0.2s;
 }
 
 #editBtn:hover{
-background-color: gray;
+    color: white;
+    transition: color 0.2s;
 }
 
 /*New Note Popup CSS*/
@@ -149,7 +163,7 @@ background-color: gray;
     width: 400px;
     height: 300px;
     background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid #FFD400;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 20px;
     border-radius: 8px;
@@ -168,7 +182,7 @@ margin: 10px 0;
 padding: 10px;
 box-sizing: border-box;
 border-radius: 4px;
-border: 2px solid #8c53ff;
+border: 2px solid #FFD400;
 }
 
 #btn-container{
@@ -177,9 +191,9 @@ border: 2px solid #8c53ff;
 
 #submitBtn, #closeBtn{
 width: 100px;
-background-color: #8c53ff;
-color: #fff;
-font-size: 14px;
+background-color: #FFD400;
+color: #000000;
+font-size: 12px;
 border: none;
 border-radius: 5px;
 padding: 10px;
@@ -209,4 +223,27 @@ background-color: gainsboro;
     text-align: center;
     align-items: center;
     justify-content: center;
+    scrollbar-width: none;
 }
+
+#toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #FFD400;
+    padding: 16px;
+    border-radius: 1px;
+    font-size: 17px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+  }
+  
+  #toast.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  
