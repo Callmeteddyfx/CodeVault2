@@ -51,9 +51,8 @@ function createNote(){
         notes.forEach(note => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-            <span>${note.text}</span>
+            <span><pre><code class="language-javascript">${note.text}</code></pre></span>
             <div id = 'noteBtns-container'>
-          
             <button id = "editBtn" onClick = 'editNote(${note.id})'><i
             class = 'fa-solid fa-pen'></i></button>
            <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
@@ -68,7 +67,6 @@ function createNote(){
 
 
 function editNote(noteId){
-    showToast(noteId)
     const notes = JSON.parse(localStorage.getItem('notes')) || [];
     const noteToEdit = notes.find(note => note.id == noteId) ;
     const noteText = noteToEdit ? noteToEdit.text : '';
