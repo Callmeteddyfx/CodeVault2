@@ -37,7 +37,13 @@ function createNote(){
         document.getElementById('note-text').value = '';
 
         popupContainer.remove();
+
+              // Refreshes the browser
+    location.reload();
+    document.getElementById('createBtn').addEventListener('click', myFunction);
+    
         displayNotes();
+
     }
 }
 
@@ -114,6 +120,10 @@ function updateNote(){
     //Close the editing popup
     editingPopup.remove();
 
+    // Refreshes the browser
+    location.reload();
+    document.getElementById('submitBtn').addEventListener('click', myFunction);
+
     //Refresh the displayed notes
     displayNotes();
 
@@ -125,6 +135,7 @@ function deleteNote(noteId){
     notes = notes.filter(note => note.id !== noteId);
 
     localStorage.setItem('notes', JSON.stringify(notes));
+    refresh(deleteBtn)
     displayNotes();
 }
 
@@ -148,5 +159,28 @@ function copyNote(noteId){
     const noteText = noteToCopy ? noteToCopy.text : '';
     navigator.clipboard.writeText(noteText);
 }
+
+function refresh(button){
+// Save the scroll position before refreshing
+
+    localStorage.setItem('scrollPosition', window.scrollY);
+    location.reload(); // Refresh the page
+
+  // Restore the scroll position after reload
+  function restoreScrollPosition() {
+    const scrollPosition = localStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      localStorage.removeItem('scrollPosition'); // Clear the saved position
+    }
+  }
+  
+     // Add event listener to button
+     document.getElementById(button).addEventListener('click', saveScrollPosition);
+     
+  // Call restore on page load
+  window.onload = restoreScrollPosition;  
+}
+     
 
 displayNotes();
