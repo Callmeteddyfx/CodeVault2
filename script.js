@@ -147,6 +147,7 @@ function showToast(message) {
 
 function copyNote(noteId){
     showToast('Copied'); 
-    const copy = JSON.parse(localStorage.getItem('notes-list'));
-    return navigator.clipboard.writeText(copy);
+    let note = JSON.parse(localStorage.getItem('notes')) || [];
+    noteId = document.getElementById(note);
+    navigator.clipboard.writeText(noteId);
 }

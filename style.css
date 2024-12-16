@@ -26,9 +26,13 @@ body{
 #title{
     font-size: 50px;
     font-family: 'Poppins', sans-serif;
+    color: #FFD400;
     margin: 0px;
-    border: 0px;
+    -webkit-text-stroke: 0.5px #000;
+    cursor: pointer;
 }
+
+
 
 #list-header{
     display: flex;
@@ -74,6 +78,36 @@ background-color: #f1f1f1;
     font-size: 70px;
     color: gainsboro;
 }
+
+/*Mode Changer*/
+
+.mode{
+    background-color:#f9f9f9;
+    border: none;
+    padding: 20px;
+    border-radius: 8px;
+    border-style: outset;
+    border-width: 1.5px;
+    border-color: #FFD400;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mode i {
+    font-size: 70px;
+    color: gainsboro;
+}
+
+#mode:hover {
+    transition: 0.3s;
+    background-color: #f1f1f1;
+    }
+
 
 /*List CSS*/
 #list-container {
@@ -234,8 +268,9 @@ background-color: gainsboro;
     background-color: #000;
     color: #FFD400;
     padding: 16px;
-    border-radius: 1px;
+    border-radius: 10px;
     font-size: 17px;
+    font-family: impact;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;
