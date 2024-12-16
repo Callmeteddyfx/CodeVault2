@@ -37,11 +37,6 @@ function createNote(){
         document.getElementById('note-text').value = '';
 
         popupContainer.remove();
-
-              // Refreshes the browser
-    location.reload();
-    document.getElementById('createBtn').addEventListener('click', myFunction);
-    
         displayNotes();
 
     }
@@ -57,7 +52,7 @@ function createNote(){
         notes.forEach(note => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-            <span><pre><code class="language-javascript">${note.text}</code></pre></span>
+            <span id = "code"><pre><code class="language-javascript">${note.text}</code></pre></span>
             <div id = 'noteBtns-container'>
             <button id = "editBtn" onClick = 'editNote(${note.id})'><i
             class = 'fa-solid fa-pen'></i></button>
@@ -67,7 +62,8 @@ function createNote(){
             class = 'fa-solid fa-copy'></i></button>
             </div>  
             `;
-            notesList.appendChild(listItem);
+            addPrismResources('code');
+            notesList.appendChild(listItem);  
         });
     }
 
@@ -120,13 +116,8 @@ function updateNote(){
     //Close the editing popup
     editingPopup.remove();
 
-    // Refreshes the browser
-    location.reload();
-    document.getElementById('submitBtn').addEventListener('click', myFunction);
-
     //Refresh the displayed notes
     displayNotes();
-
     }
 }
 
@@ -135,7 +126,6 @@ function deleteNote(noteId){
     notes = notes.filter(note => note.id !== noteId);
 
     localStorage.setItem('notes', JSON.stringify(notes));
-    refresh(deleteBtn)
     displayNotes();
 }
 
@@ -160,27 +150,33 @@ function copyNote(noteId){
     navigator.clipboard.writeText(noteText);
 }
 
-function refresh(button){
-// Save the scroll position before refreshing
 
-    localStorage.setItem('scrollPosition', window.scrollY);
-    location.reload(); // Refresh the page
 
-  // Restore the scroll position after reload
-  function restoreScrollPosition() {
-    const scrollPosition = localStorage.getItem('scrollPosition');
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition, 10));
-      localStorage.removeItem('scrollPosition'); // Clear the saved position
+// Function to add the links and scripts dynamically
+function addPrismResources(targetElementId) {
+    // Create and append the Prism CSS link
+    const cssLink = document.createElement('link');
+    cssLink.rel = 'stylesheet';
+    cssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+  
+    // Create and append the Prism JS script
+    const prismScript = document.createElement('script');
+    prismScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js';
+  
+    // Create and append the Prism JS language component for JavaScript
+    const prismJsScript = document.createElement('script');
+    prismJsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js';
+  
+    // Get the target element by ID
+    const targetElement = document.getElementById(targetElementId);
+  
+    // Append the created elements to the target element
+    if (targetElement) {
+      targetElement.appendChild(cssLink);      // Add CSS link to the target
+      targetElement.appendChild(prismScript);  // Add Prism script to the target
+      targetElement.appendChild(prismJsScript); // Add the JS language component
     }
   }
   
-     // Add event listener to button
-     document.getElementById(button).addEventListener('click', saveScrollPosition);
-     
-  // Call restore on page load
-  window.onload = restoreScrollPosition;  
-}
-     
 
 displayNotes();
