@@ -270,7 +270,7 @@ background-color: gainsboro;
     padding: 16px;
     border-radius: 10px;
     font-size: 17px;
-    font-family: impact;
+    font-family: monospace;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;

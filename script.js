@@ -58,7 +58,7 @@ function createNote(){
             class = 'fa-solid fa-pen'></i></button>
            <button id = "deleteBtn" onClick = 'deleteNote(${note.id})'><i
             class = 'fa-solid fa-trash'></i></button>
-            <button id = 'copyBtn' onClick = 'copyNote()'><i 
+            <button id = 'copyBtn' onClick = 'copyNote(${note.id})'><i 
             class = 'fa-solid fa-copy'></i></button>
             </div>  
             `;
@@ -68,11 +68,11 @@ function createNote(){
 
 
 function editNote(noteId){
+    showToast(noteId)
     const notes = JSON.parse(localStorage.getItem('notes')) || [];
     const noteToEdit = notes.find(note => note.id == noteId) ;
     const noteText = noteToEdit ? noteToEdit.text : '';
     const editingPopup = document.createElement('div');
-
     editingPopup.innerHTML= `
     <div id='editing-container' data-note-id = "${noteId}">
     <h1>Edit Code</h1>
@@ -131,8 +131,6 @@ function deleteNote(noteId){
 }
 
 
-displayNotes();
-
 function showToast(message) {
     var toast = document.getElementById("toast");
     toast.textContent = message;
@@ -146,8 +144,11 @@ function showToast(message) {
   
 
 function copyNote(noteId){
-    showToast('Copied'); 
-    let note = JSON.parse(localStorage.getItem('notes')) || [];
-    noteId = document.getElementById(note);
-    navigator.clipboard.writeText(noteId);
+    showToast('Code Copied!'); 
+    const notes = JSON.parse(localStorage.getItem('notes')) || [];
+    const noteToCopy = notes.find(note => note.id == noteId) ;
+    const noteText = noteToCopy ? noteToCopy.text : '';
+    navigator.clipboard.writeText(noteText);
 }
+
+displayNotes();
