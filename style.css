@@ -275,6 +275,26 @@ background-color: gainsboro;
     visibility: hidden;
     transition: opacity 0.5s, visibility 0.5s;
   }
+
+#about{
+    position: fixed;
+    right: 5%;
+    left: 5%;
+    border: 10px;
+    margin: 10px;
+    color: #FFD400;
+    font-family: monospace;
+    font-size: 15px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+
+#title:hover ~ #about{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.1s ease, visibility 0s 0s;
+}
   
   #toast.show {
     opacity: 1;
