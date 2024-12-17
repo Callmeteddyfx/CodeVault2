@@ -178,5 +178,9 @@ function addPrismResources(targetElementId) {
     }
   }
   
+function darkmode(){
+
+}
+
 
 displayNotes();

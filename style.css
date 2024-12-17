@@ -26,9 +26,8 @@ body{
 #title{
     font-size: 50px;
     font-family: 'Poppins', sans-serif;
-    color: #FFD400;
+    color: #000;
     margin: 0px;
-    -webkit-text-stroke: 0.5px #000;
     cursor: pointer;
 }
 
