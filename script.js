@@ -52,7 +52,7 @@ function createNote(){
         notes.forEach(note => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-            <span id = "code"><pre><code class="language-javascript">${note.text}</code></pre></span>
+            <span id = "code" onClick = 'editNote(${note.id})'><pre><code class="language-javascript">${note.text}</code></pre></span>
             <div id = 'noteBtns-container'>
             <button id = "editBtn" onClick = 'editNote(${note.id})'><i
             class = 'fa-solid fa-pen'></i></button>
